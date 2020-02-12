@@ -1,0 +1,50 @@
+Using git
+
+Install
+sudo apt install git
+
+Mandatory config:
+git config --global user.name "evrisko"
+git config --global user.email "euvrisko@gmail.com"
+
+Show global config:
+git config -l
+
+initialize:
+mkdir project
+cd project
+git init .
+git status
+
+git add	* (git add .)- добавить все файлы для комита (добавлены в stating status )
+git commit -m "init commit" (файлы стали снимком)
+
+change or add file = untracked
+git add = staged
+git commit = copy in local repository
+git push = copy in remote repository
+
+git log - история коммитов
+git log -1 - последний коммит
+git log -1 -p - что было сделано в последнем комите 
+
+убрать все изменения (к предыдущему комиту)
+git checkout -- file1.txt
+
+показывает разницу между фалом в staged и последнем комитом
+git diff --staged 
+
+В файле .gitignore описывается то что не нужно треккать
+
+склонировать репозиторий
+git clone <url>
+
+Закинуть на remote repository
+git push origin
+
+Посмотреть каким образом проходит аутентификация
+git remote -v 
+Поменять на SSH 
+git remote set-url origin git@github.com:evrisko/terraform-learn.git
+
+
