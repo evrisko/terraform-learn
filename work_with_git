@@ -26,25 +26,24 @@ git push = copy in remote repository
 
 git log - история коммитов
 git log -1 - последний коммит
-git log -1 -p - что было сделано в последнем комите 
+git log -1 -p - что было сделано в последнем комите
 
 убрать все изменения (к предыдущему комиту)
 git checkout -- file1.txt
 
 показывает разницу между фалом в staged и последнем комитом
-git diff --staged 
+git diff --staged
 
 В файле .gitignore описывается то что не нужно треккать
 
-склонировать репозиторий
+Clone repository:
 git clone <url>
 
-Закинуть на remote repository
+Push to remote repository
 git push origin
 
-Посмотреть каким образом проходит аутентификация
-git remote -v 
-Поменять на SSH 
+Show method aythetication:
+git remote -v
+
+Change to SSH
 git remote set-url origin git@github.com:evrisko/terraform-learn.git
-
-
