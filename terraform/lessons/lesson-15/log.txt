@@ -1,0 +1,4 @@
+Terraform Start: Чцв лют 13 21:44:12 +03 2020
+Terraform Start: Чцв лют 13 21:53:00 +03 2020
+Terraform Start: Чцв лют 13 22:03:16 +03 2020
+Terraform Start: Чцв лют 13 22:03:53 +03 2020

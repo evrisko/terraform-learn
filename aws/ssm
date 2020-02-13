@@ -1,0 +1,29 @@
+1. greate EC2
+2. create IAM role for access from EC2 to SSM parameter store (AmazonEC2RoleforSSM)
+3. attach IAM role to instance
+4. create any parameters in store (like password or name)
+5. in EC2 instance get it:
+aws ssm get-parameters --name <name> --region <region>
+
+option add:
+--output text --query Parameters[].Value
+for output only value of parameter
+
+Example add environment variables:
+export TESTNAME=`aws ssm get-parameters --name test-name --region eu-central-1 --output text --query Parameters[].Value`
+echo $TESTNAME
+env | grep TEST
+
+for password add --with-decryption
+
+Policy for only get parameters ssm
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:GetParameters",
+            "Resource": "*"
+        }
+    ]
+}
