@@ -1,2 +1,0 @@
-terraform + git
-Check new commit

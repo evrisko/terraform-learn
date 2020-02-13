@@ -1,0 +1,15 @@
+Install:
+mkdir terraform
+wget https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_amd64.zip
+cd terraform/
+unzip terraform_0.12.20_linux_amd64.zip
+rm terraform_0.12.20_linux_amd64.zip
+sudo mv terraform /bin/
+terraform --version
+
+Work:
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+terraform show (show outputs)
