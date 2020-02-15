@@ -13,3 +13,5 @@ terraform plan
 terraform apply
 terraform destroy
 terraform show (show outputs)
+To see the full set of errors that led to this message, run:
+    terraform validate
