@@ -63,3 +63,8 @@ git merge <name_branch> - merge to master
 git  branch -D test - deleted branch without merge
 
 Some useless information here, will be delete
+#comment
+
+git reset --hard HEAD~2
+git reset --soft HEAD~2
+git commit -ammend
