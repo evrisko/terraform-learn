@@ -47,3 +47,15 @@ git remote -v
 
 Change to SSH
 git remote set-url origin git@github.com:evrisko/terraform-learn.git
+
+Show branch:
+git branch
+
+create branch:
+git branch <name>
+
+git checkout <>
+git checkout master
+git branch -d <name> - delete branch
+
+git checkout -b <name_branch> - one line command
