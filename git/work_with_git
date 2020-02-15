@@ -61,3 +61,5 @@ git branch -d <name> - delete branch
 git checkout -b <name_branch> - one line command
 git merge <name_branch> - merge to master
 git  branch -D test - deleted branch without merge
+
+Some useless information here, will be delete
