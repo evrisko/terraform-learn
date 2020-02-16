@@ -81,3 +81,5 @@ Workflow:
 9.
 git push origin --delete workflow-git // delete branch local
 git push origin --delete workflow-git // Delete branch remote
+
+In atom called "Publish" insted push when you want push to branch remote
