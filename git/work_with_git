@@ -68,3 +68,14 @@ Some useless information here, will be delete
 git reset --hard HEAD~2
 git reset --soft HEAD~2
 git commit -ammend
+
+Workflow:
+1. git clone <repo>
+2. git checkout -b <name_branch>
+3. git branch
+4. Modified your code and save
+5. git status
+6. git add .
+7. git commit -m "comment" // commit in you local branch
+8. git push --set-upstream origin workflow-git // create new branch with commit on remote repository
+9.
