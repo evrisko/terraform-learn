@@ -81,7 +81,8 @@ Workflow:
 9. Compate and pull request > create pull request
 10. Review in Files Changed (apply split)
 11.
-git push origin --delete workflow-git // delete branch local
+git branch -d workflow-git // delete branch local
 git push origin --delete workflow-git // Delete branch remote
 
 In atom called "Publish" insted push when you want push to branch remote
+Fetch and pull after merge branch
