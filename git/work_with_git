@@ -70,7 +70,7 @@ git reset --soft HEAD~2
 git commit -ammend
 
 Workflow:
-1. git clone <repo>
+1. git clone <repo>s
 2. git checkout -b <name_branch>
 3. git branch
 4. Modified your code and save
@@ -79,3 +79,5 @@ Workflow:
 7. git commit -m "comment" // commit in you local branch
 8. git push --set-upstream origin workflow-git // create new branch with commit on remote repository
 9.
+git push origin --delete workflow-git // delete branch local
+git push origin --delete workflow-git // Delete branch remote
