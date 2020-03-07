@@ -1,0 +1,20 @@
+[stage]
+ip-172-31-47-153.eu-central-1.compute.internal    ansible_hosts=172.31.47.153
+ip-172-31-44-235.eu-central-1.compute.internal    ansible_hosts=172.31.44.235
+
+[stage:vars]
+ansible_ssh_private_key_file=/home/ec2-user/.ssh/ansible-client-key.pem
+
+[prod]
+ip-172-31-35-7.eu-central-1.compute.internal    ansible_hosts=172.31.35.7
+ip-172-31-39-254.eu-central-1.compute.internal  ansible_hosts=172.31.39.254
+
+[prod:vars]
+ansible_ssh_private_key_file=/home/ec2-user/.ssh/ansible-client-key2.pem
+
+[all_ec2:children]
+stage
+prod
+
+[all_ec2:vars]
+ansible_users=ec2-user

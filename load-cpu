@@ -1,0 +1,20 @@
+sudo apt install stress
+CPU
+
+
+# Single thread CPU load
+md5sum /dev/urandom
+
+# Multi thread CPU load
+stress --cpu 4 --timeout 300s
+
+cat /dev/zero | bzip2 -c > /dev/null
+cat /dev/urandom | gzip > /dev/null
+
+### HDD ###
+
+cat /dev/sda3 | pipebench -q > /dev/null - RAW Read Speed Test
+dd bs=16k count=102400 oflag=direct if=/dev/zero of=test_data - Write Test
+dd bs=16K count=102400 iflag=direct if=test_data of=/dev/null - Read Test
+
+sudo hostnamectl set-hostname webserver.mydomain.com
