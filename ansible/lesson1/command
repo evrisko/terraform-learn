@@ -46,3 +46,30 @@ ansible stage -m setup
 ansible stage -m shell -a "uptime"
 ansible all -m command -a "uname -a"
 ansible prod -m shell -a "free -m"
+
+# copy file to dst
+touch testfile
+ansible all -m copy -a "src=testfile dest=testfile
+ansible all -m shell -a "ls"
+
+# delete files
+ansible all -m file -a "path=./testfile state=absent" -b
+
+# download from remote machines
+ansible all -m get_url -a "url=https://releases.hashicorp.com/terraform/0.12.23/terraform_0.12.23_linux_amd64.zip dest=/home/ec2-user/" -b
+
+# installing tool
+ansible all -m yum -a "name=whois state=installed" -b
+ansible all -m yum -a "name=whois state=removed" -b
+
+ansible all -m uri -a "url=http://tut.by"
+ansible all -m uri -a "url=http://tut.by return_content=yes"
+
+ansible all -m yum -a "name=httpd state=latest" -b
+ansible all -m service -a "name=httpd state=started enabled=yes" -b
+ansible all -m yum -a "name=httpd state=removed" -b
+
+ansible prod -m shell -a "ls -la" -vvv
+
+# DOC
+ansible-doc -l | grep ec2
