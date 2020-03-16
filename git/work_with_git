@@ -39,6 +39,13 @@ git tag
 git tag -n
 git show <number>
 
+Delete tag:
+git tag -d v0.0.1
+
+Tag with annotation
+git add -a -m "Version 1.1.0" v1.1.0 master
+
+
 убрать все изменения (к предыдущему комиту)
 git checkout -- file1.txt
 
@@ -79,6 +86,9 @@ Some useless information here, will be delete
 git reset --hard HEAD~2
 git reset --soft HEAD~2
 git commit -ammend
+
+
+
 
 git without branch
 git clone https://github.com/evrisko/terraform-learn.git
