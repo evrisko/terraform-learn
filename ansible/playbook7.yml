@@ -1,0 +1,62 @@
+# 1. Install web server for on two different OS (Amazon Linux, Ubuntu)
+# 2. Using loop, copy some files or fileglob
+# 3. Using handlers, if we have changed we'll restart apache server
+# 4. vars
+# 5. command "when" indicated which OS uses and execute right command
+
+---
+- name: Install web server
+  hosts: all
+  become: yes
+
+
+  vars:
+    source_folder: ./website
+    dest_folder: /var/www/html
+
+  tasks:
+  - name: Check and pring linus distro
+    debug: var=ansible_os_family
+
+  - block: #-----Block for RedHat
+
+     - name: Install Apache web server for RedHat
+       yum: name=httpd state=latest
+
+     - name: Start webserver for RedHat
+       service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family == "RedHat"
+
+  - block: #-----Block for Debian
+
+     - name: Install Apache web server for Debian
+       apt: name=apache2 state=latest
+
+     - name: Start webserver for Ubuntu
+       service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family == "Debian"
+
+  - name: Copy homepage to servers
+    copy: src={{ item }} dest={{ dest_folder }} mode=0555
+    with_fileglob: "{{ source_folder }}/*.*"
+
+#    copy: src={{ source_folder }}/{{ item }} dest={{ dest_folder }} mode=0555
+#    loop:
+#       - "img-2145.jpg"
+#       - "index.html"
+
+    notify:
+       - Restart Apache RedHat
+       - Restart Apache Debian
+
+
+  handlers:
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"

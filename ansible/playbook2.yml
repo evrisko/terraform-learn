@@ -1,0 +1,13 @@
+# Install apache
+
+---
+- name: Install web server
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Install Apache web server
+    yum: name=httpd state=latest
+
+  - name: Start Apache and Enable
+    service: name=httpd state=started enabled=yes

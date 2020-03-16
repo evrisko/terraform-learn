@@ -1,0 +1,53 @@
+# Using Jinja template
+# Generate index.html and copy to different servers
+# Using vars from ansible all -m setup and local var "owner"
+
+---
+- name: Install web server
+  hosts: all
+  become: yes
+
+  vars:
+    source_folder: ./website
+    dest_folder: /var/www/html
+
+  tasks:
+  - name: Check and pring linus distro
+    debug: var=ansible_os_family
+
+  - block: #-----Block for RedHat
+     - name: Install Apache web server for RedHat
+       yum: name=httpd state=latest
+     - name: Start webserver for RedHat
+       service: name=httpd state=started enabled=yes
+    when: ansible_os_family == "RedHat"
+
+  - block: #-----Block for Debian
+     - name: Install Apache web server for Debian
+       apt: name=apache2 state=latest
+     - name: Start webserver for Ubuntu
+       service: name=apache2 state=started enabled=yes
+    when: ansible_os_family == "Debian"
+
+  - name: Generate index.html file
+    template: src={{ source_folder }}/index.j2 dest={{ dest_folder }}/index.html mode=0555
+    notify:
+       - Restart Apache RedHat
+       - Restart Apache Debian
+
+  - name: Copy homepage to servers
+    copy: src={{ source_folder }}/{{ item }} dest={{ dest_folder }} mode=0555
+    loop:
+       - "img-2145.jpg"
+    notify:
+       - Restart Apache RedHat
+       - Restart Apache Debian
+
+  handlers:
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"
+
+  - name: Restart Apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"

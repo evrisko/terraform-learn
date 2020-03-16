@@ -1,0 +1,17 @@
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Static Page for AWS</title>
+  </head>
+  <body bgcolor="#E6E6FA">
+    <h1 align="center">Special page</h1>
+    <h2 align="center">Testing deploy generated from Jinja template</h2>
+    <p align="center">Owner of this server is: {{ owner }}</p>
+    <p align="center"><img src="img-2145.jpg" width="1800" height="970"></p>
+    <p align="center">From Iceland</p>
+    <p align="left">Server Hostname: {{ ansible_hostname }}</p>
+    <p align="left">Server OS Family is: {{ ansible_os_family  }}</p>
+    <p align="left">IP address of this server is: {{ ansible_all_ipv4_addresses }}</p>
+  </body>
+</html>
