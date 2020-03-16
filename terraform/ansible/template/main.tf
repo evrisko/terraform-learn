@@ -86,6 +86,13 @@ resource "aws_security_group" "ansible_client" {
     description = "Access SSH from VPC"
   }
   ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["82.209.228.99/32"]
+    description = "Access SSH from VPC"
+  }
+  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
