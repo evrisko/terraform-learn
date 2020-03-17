@@ -7,3 +7,9 @@ variable "instance_type" {
 variable "project" {
   default = "Ansible"
 }
+variable "hosted_zone" {
+  default = "studyawscloud.de."
+}
+variable "domain_name" {
+  default = "test.studyawscloud.de"
+}

@@ -9,6 +9,10 @@ terraform {
   }
 }
 
+data "aws_route53_zone" "selected" {
+  name = var.hosted_zone
+}
+
 data "aws_ami" "latest_amazon" {
   owners      = ["amazon"]
   most_recent = true
@@ -51,9 +55,9 @@ resource "aws_instance" "ansible_client_ubuntu" {
     Env     = var.environment
   }
 }
-/*resource "aws_instance" "ansible_master" {
+resource "aws_instance" "ansible_master" {
   ami                    = data.aws_ami.latest_amazon.id
-  vpc_security_group_ids = [aws_security_group.my_ansible_client.id]
+  vpc_security_group_ids = [aws_security_group.ansible_client.id]
   instance_type          = var.instance_type
   key_name               = "aws-key"
   tags = {
@@ -63,7 +67,13 @@ resource "aws_instance" "ansible_client_ubuntu" {
     Env     = var.environment
   }
 }
-
+resource "aws_route53_record" "www" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = var.domain_name
+  type    = "A"
+  ttl     = "300"
+  records = [aws_eip.my_static_global.public_ip]
+}
 resource "aws_eip" "my_static_global" {
   instance = aws_instance.ansible_master.id
   tags = {
@@ -73,7 +83,6 @@ resource "aws_eip" "my_static_global" {
     Env     = var.environment
   }
 }
-*/
 resource "aws_security_group" "ansible_client" {
   name        = "Ansible_client Security Group"
   description = "Allow SSH"
@@ -90,6 +99,13 @@ resource "aws_security_group" "ansible_client" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["82.209.228.99/32"]
+    description = "Access SSH from VPC"
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["212.98.163.82/32"]
     description = "Access SSH from VPC"
   }
   ingress {
