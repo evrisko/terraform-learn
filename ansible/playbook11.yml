@@ -1,0 +1,28 @@
+##########################################################
+# Working with errors                                    #
+# 1. Ignore error and do next task                       #
+# 2  Output result, stdout                               #
+# 3. Conditional check (failed_when)                     #
+##########################################################
+---
+- name: Catch error
+  hosts: prod
+#? any_errors_fatal: true
+  become: yes
+
+  tasks:
+  - name: Task 1
+    yum: name=treeeee state=latest
+    ignore_errors: yes
+
+  - name: Task 2
+    shell: cat /home/ec2-user/file
+    register: result1
+#   failed_when: "'client' in results.stdout"
+
+  - debug:
+      var: result1
+
+  - name: Task 3
+    shell: echo Privet!
+
