@@ -1,0 +1,35 @@
+###############################################################
+# Playbook include:                                           #
+#  1. Update instances                                        #
+#  2. Send log to Master (command delegate_to)                #
+#  3. Reboot servers (command shell, wait_for)                #
+###############################################################
+---
+- name: Install web server
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Check hosts
+    ping:
+
+  - name: update ec2 instances
+    yum: name=* state=latest
+
+  - name: Send log to Ansible Master
+    shell: echo This server {{ inventory_hostname }} was updated. Node name is {{ ansible_nodename }} >> /home/log.txt
+    delegate_to: 127.0.0.1
+
+  - name: Reboot my servers
+    shell: sleep 3 && reboot now
+    async: 1
+    poll: 0
+
+  - name: Wait till my servers up
+    wait_for:
+       host: "{{ inventory_hostname }}"
+       state: started
+       delay: 5
+       timeout: 40
+    delegate_to: 127.0.0.1
+
