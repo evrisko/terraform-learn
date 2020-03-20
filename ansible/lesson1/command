@@ -73,3 +73,27 @@ ansible prod -m shell -a "ls -la" -vvv
 
 # DOC
 ansible-doc -l | grep ec2
+
+# Ansible vault for encryption
+ansible-vault encrypt playbook12.yml
+ansible-vault decrypt playbook12.yml
+ansible-vault view playbook12.yml
+ansible-vault rekey playbook12.yml
+ansible-vault create mysecret.txt
+
+ansible-playbook playbook12.yml --ask-vault-pass
+ansible-playbook playbook12.yml --vault-password-file <file_with_path>
+
+#Create encryption string and using
+1. echo -n "12321sefl3495j(*&U" | ansible-vault encrypt_string
+2. input password for encrypt string
+3. copy
+!vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          61646232396136636162333165316565356361386130353137623762393265383934303530646634
+          3736373031633839326138333330616231353662643335360a656664306130623235323366663132
+          38613161326562623365363831323231623933323339303332346339616366633330323639323835
+          3061383131396330310a343535646565316465393633366366623134616464353162396333353333
+          33616339323930666661616234336338376630396133376364616361333239663036
+to the playbook
+4. Use --ask-vault-pass when launch playbook
