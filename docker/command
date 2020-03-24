@@ -1,0 +1,80 @@
+Basic command for Docker
+
+docker run = docker create + docker start
+create process of copy filesystem snapshot for use container
+start execute command inside container
+
+docker create hello-world
+docker start -a <id>
+-a - print out in terminal (--attach)
+
+
+#launch ubuntu and bash
+docker run -it ubuntu bash
+
+#launch with own names
+docker run -it --name cowsay euvrisko/myapp-cowsay bash
+
+docker system prune
+
+#Busybox
+docker create busybox echo Hello world
+docker start <id>
+docker logs <id>
+
+docker stop -> SIGTERM to docker container (terminate), container down, do cleaner before shutdown
+docker kill -> SIGKILL to the process, shutdown right now, not to do any additional work
+If after docker stop process not give reaction after 10 sec docker do kill command
+
+docker exec - execute an additional command in a container
+docker -it  - allow us to provide input to the container
+docker run redis
+docker exec -it  e2d1e2a8e9fd redis-cli
+
+flag -i - attach your local terminal to stdin process in docker container
+flag -t - for formatted
+
+#change hostname inside container
+docker run -it --name cowsay2 -h cowsay-app euvrisko/myapp-cowsay bash
+docker run -it --name myapp --hostname myapp ubuntu bash
+
+docker attach
+docker start/stop
+
+#launch and port mapping; -d - background mode
+docker run -d -p 8000:8080 bitnami/apache
+
+#show images
+docker images
+
+#active container
+docker ps
+
+#all container
+docker ps -a
+
+#download image
+docker pull euvrisko/myapp-cowsay:latest
+
+#deleting images
+docker rmi <image_id>
+
+#deleting stopped containers
+docker ps -aq -f status=exited
+docker rm -v $(docker ps -aq -f status=exited)
+
+#Build by using existing Dockerfile
+docker build .
+docker build -t euvrisko/redis:latest
+
+
+#inspect changes in container filesystem
+docker diff euvrisko/myapp-cowsay
+
+#show container logs
+docker logs euvrisko/myapp-cowsay
+
+#push to docker hub
+docker commit myapp dockerid/myappimage
+docker login
+docker push dockerid/myappimage
