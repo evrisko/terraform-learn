@@ -67,6 +67,8 @@ docker rm -v $(docker ps -aq -f status=exited)
 docker build .
 docker build -t euvrisko/redis:latest
 
+#Use Dockerfuke with other name
+docker build -f Dockerfile.dev .
 
 #inspect changes in container filesystem
 docker diff euvrisko/myapp-cowsay
@@ -78,3 +80,13 @@ docker logs euvrisko/myapp-cowsay
 docker commit myapp dockerid/myappimage
 docker login
 docker push dockerid/myappimage
+
+#Docker-compse need .yml file
+docker run myimage => docker-compose up
+docker build . & docker run myimage => docker-compose up --build
+
+#Launch in background
+docker-compose up -d
+
+#stop containers
+docker-compose down
