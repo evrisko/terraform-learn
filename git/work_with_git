@@ -86,7 +86,7 @@ Some useless information here, will be delete
 git reset --hard HEAD~2
 git reset --soft HEAD~2
 git commit -ammend
-
+git commit --amend --no-edit (change last commit without adding new commit, first git add <file>)
 
 
 
